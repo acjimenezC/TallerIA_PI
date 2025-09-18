@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🎯 Recomendador de Películas</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="prompt" placeholder="Describe una película" required>
+  <button type="submit">Buscar</button>
+</form>
+{% if recommendation %}
+  <hr>
+  <h3>Película recomendada:</h3>
+  <p><strong>{{ recommendation.title }}</strong> (Similitud: {{ similarity }})</p>
+  {% if recommendation.image %}
+    <img src="{{ recommendation.image.url }}" width="200">
+  {% endif %}
+{% endif %}
+{% endblock %}
